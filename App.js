@@ -30,12 +30,15 @@ function AnimatronicCard({ name, image,game }) {
 
 export default function App() {
   const [animatronics,setAnimatronics] = useState([]);
-  useEffect(async() => {
-    const animatronicsOfApi = await fetch('https://fnaf-web.vercel.app/api/v1/all');
-    const animatronicsOfApiJson = await animatronicsOfApi.json();
+  useEffect(() => {
+    async function fetchData(){
+      const animatronicsOfApi = await fetch('https://fnaf-web.vercel.app/api/v1/all');
+      const animatronicsOfApiJson = await animatronicsOfApi.json();
 
-    setAnimatronics(animatronicsOfApiJson);
-  },[])
+      setAnimatronics(animatronicsOfApiJson);
+    }
+    fetchData()
+  },[ animatronics ])
 
   return (
     <SafeAreaView style={styles.container}>
